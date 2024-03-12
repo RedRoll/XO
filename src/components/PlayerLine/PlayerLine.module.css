@@ -1,0 +1,8 @@
+input {
+    outline: none;
+}
+
+input:focus {
+    border-color: red;
+    transition: border-color ease .4s;
+}

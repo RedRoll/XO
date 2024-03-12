@@ -1,34 +1,47 @@
+import styles from './App.module.css'
+
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+import PlayerLine from './components/PlayerLine/PlayerLine'
+
+import logo from './assets/LOGO.png'
+
+// const DEFAULT_PLAYER_DATA = {
+//   player1: {
+//     name: 'Player 1',
+//     symbol: 'X'
+//   },
+//   player2: {
+//     name: 'Player 2',
+//     symbol: 'O'
+//   },
+//   toggle: true
+// }
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  // let playerData = structuredClone(DEFAULT_PLAYER_DATA)
+
+  // const [player, setplayer] =  useState(playerData)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main className={styles.wrapper}>
+
+      <img className={styles.logo__img} src={logo} alt="Game logo" title='Main game logo' />
+
+      {/* main game container */}
+      <div className={styles['game-wrapper']}>
+
+        <div className={styles.game__players}>
+          <PlayerLine name='Player 1' symbol='X' />
+          <PlayerLine name='Player 2' symbol='O' />
+        </div>
+        {/* <PlayerLine /> */}
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      {/* end main conatiner */}
+
+    </main>
   )
 }
 
