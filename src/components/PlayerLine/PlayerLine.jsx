@@ -2,6 +2,8 @@ import styles from './PlayerLine.module.css'
 
 import { useState } from 'react'
 
+import Player from './Player/Player'
+
 
 
 const PlayerLine = ({ name, symbol }) => {
@@ -9,7 +11,6 @@ const PlayerLine = ({ name, symbol }) => {
     const INPUT_DATA = {
         playerName: name,
         playerSymbol: symbol,  // планую використати для обнулення гравців
-        toggle: true 
     }
 
     let playerData = structuredClone(INPUT_DATA)
@@ -26,15 +27,14 @@ const PlayerLine = ({ name, symbol }) => {
     }
 
     
-   
 
     return (
         <div className={styles.player}>
 
-            <input className={styles.player__name} value={player.playerName} type="text" onChange={event => changeHandler(event, Object.keys(player)[0])} required  />
-
-            <input className={styles.player__symbol} value={player.playerSymbol} type="text" onChange={event => changeHandler(event, Object.keys(player)[1])}  required />
-
+           
+            <Player onChangeHandler={changeHandler} player={player} />
+            <Player onChangeHandler={changeHandler} player={player} />
+            
         </div>
     )
 }

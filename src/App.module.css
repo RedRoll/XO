@@ -29,5 +29,7 @@
 .game__players {
     display: flex;
     justify-content: center;
-    column-gap: 10px;
+    column-gap: 70px;
+    flex-wrap: wrap;
+    border: 1px solid white;
 }
