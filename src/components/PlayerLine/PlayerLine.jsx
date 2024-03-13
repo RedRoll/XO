@@ -33,7 +33,7 @@ const PlayerLine = ({ name, symbol }) => {
 
            
             <Player onChangeHandler={changeHandler} player={player} />
-            <Player onChangeHandler={changeHandler} player={player} />
+            
             
         </div>
     )

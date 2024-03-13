@@ -34,6 +34,7 @@ function App() {
 
         <div className={styles.game__players}>
           <PlayerLine name='Player 1' symbol='X' />
+          <PlayerLine name='Player 2' symbol='O' />
         </div>
         {/* <PlayerLine /> */}
 
