@@ -1,8 +1,6 @@
 import styles from './App.module.css'
 
-import { useState } from 'react'
-
-import PlayerLine from './components/PlayerLine/PlayerLine'
+import Player from './components/Player/Player'
 
 import logo from './assets/LOGO.png'
 
@@ -33,8 +31,9 @@ function App() {
       <div className={styles['game-wrapper']}>
 
         <div className={styles.game__players}>
-          <PlayerLine name='Player 1' symbol='X' />
-          <PlayerLine name='Player 2' symbol='O' />
+          {/* додати логіку, якщо в одному playerline відкриті nput, то в іншому playerline заборонити відкривати доки не закриються в першому */}
+          <Player name='Player 1' symbol='X' />
+          <Player name='Player 2' symbol='O' />
         </div>
         {/* <PlayerLine /> */}
 
