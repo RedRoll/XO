@@ -20,11 +20,16 @@ input {
     border: none;
     font-family: inherit;
     outline: none;
+    padding: 5px;
+    border: 1px solid transparent;
 }
 
 input:focus {
-    border-color: red;
-    transition: border-color ease .4s;
+    border: 1px solid white;
+}
+
+input:focus.animated-input {
+    animation-play-state: paused;
 }
 
 .player__button {
@@ -33,7 +38,6 @@ input:focus {
     width: 100%;
     font-family: inherit;
 }
-
 
 .popUp {
     position: fixed;
@@ -57,18 +61,48 @@ input:focus {
 
 /* -------------- */
 
-/* input {
-    outline: none;
-    padding: 5px 10px;
-    font-family: inherit;
-    max-width: 170px;
-} */
 
 
 
 /* player name/symbol */
 
+.player__name, .player__symbol {
+    color: red;
+}
+
+
+
 .player__nameText {
     padding: 5px 0px;
     font-family: inherit;
+    max-width: 70px;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid transparent;
+}
+
+/* input animation */
+
+.animated-input {
+    animation-name: input-background-move;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.input-selection {
+    border: 1px solid red;
+}
+
+
+@keyframes input-background-move {
+    0% {
+        color: white;
+    }
+    50% {
+        color: red;
+    }
+    100% {
+        color: white;
+    }
 }
