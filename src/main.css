@@ -7,8 +7,9 @@
     
  }
 
-ul {
-    list-style: none;
+ul,ol {
+    
+    list-style-type: none;
 }
 
 a {
