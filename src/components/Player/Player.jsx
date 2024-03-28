@@ -61,6 +61,8 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer }) => {
 
     }
 
+    const handlerClosePopUp = () => setToggle( prevState => { return {...prevState, popUp: !prevState.popUp} } )
+
     const clickHandlerInput = item => {
         setToggle(prevState => { return { ...prevState, inputClicked: !prevState.inputClicked } }),
             setPlayer(prevState => {
@@ -115,7 +117,7 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer }) => {
                     <div className={styles.popUp__content}>
                         <h2>Popup Title</h2>
                         <p>This is the content of the popup.</p>
-                        <button onClick={() => { }}>Close</button>
+                        <button onClick={handlerClosePopUp}>Close</button>
                     </div>
                 </div>
 

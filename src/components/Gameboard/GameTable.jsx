@@ -12,7 +12,7 @@ const GameBoard = ({ gameTable, onSquareClick }) => {
                     
                     {row.map((symbol, colIndex) => <li className={styles.row__symbol} key={colIndex}> {/*3 items in row*/} 
 
-                        <button onClick={ () => onSquareClick(rowIndex, colIndex)} className={styles.symbol__button}>{symbol}</button> {/*cell in item*/} 
+                        <button onClick={ () => onSquareClick(rowIndex, colIndex)} className={styles.symbol__button} disabled={symbol !== null}>{symbol}</button> {/*cell in item*/} 
 
                     </li>)}
 

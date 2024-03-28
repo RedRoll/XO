@@ -4,6 +4,8 @@ import { useState } from 'react'
 
 import Player from './components/Player/Player'
 import GameTable from './components/Gameboard/GameTable'
+import PopUp from './components/PopUp/PopUp'
+import Log from './components/Log/Log'
 
 import logo from './assets/LOGO.png'
 import { WINNING_COMBINATIONS } from './WINNING_COMBINATIONS'
@@ -39,6 +41,27 @@ const setGameTable = data => {
   return gameTable
 }
 
+// auxiliary function that chek winnig combinations on gameTable
+const checkWinningCombinations = (gameTable, gameData) => {
+
+  let winner
+
+  for(const item of WINNING_COMBINATIONS) {
+
+    let firstCell = gameTable[item[0].row][item[0].column]
+    let secondtCell = gameTable[item[1].row][item[1].column]
+    let thirdCell = gameTable[item[2].row][item[2].column]
+
+    if(firstCell && firstCell === secondtCell && firstCell === thirdCell) {
+      winner = gameData[gameData.length -1].curSymbol
+    }
+
+  }
+
+  return winner //if winner = true (symbol for example 'X') => popUp opens (popUP will depend by the variable winner)
+
+}
+
 
 function App() {
 
@@ -64,11 +87,17 @@ function App() {
     })
   }
 
-  console.log(gameSquareData)
+  console.log(gameSquareData.length)
 
   const gameTable = setGameTable(gameSquareData) // re-run every time the state changes
 
+  const winner = checkWinningCombinations(gameTable, gameSquareData)// checking for winning combinations in gameTable
+
   const clickHandlerReset = () => setPlayer(() => playerData) // reset data on button 'reset' click
+
+  const closeHandlerPopUp = () =>  setGameSquareData( () => [] ) //close popUp + reset gameTable
+
+  const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
 
   return (
     <main className={styles.wrapper}>
@@ -90,8 +119,11 @@ function App() {
 
 
         <button onClick={clickHandlerReset} >Reset</button>
+
+        <Log data={gameSquareData} />
       </div>
       {/* end main conatiner */}
+      <PopUp winner={winner} onClosePopUp={closeHandlerPopUp} draw={gameDraw} />
 
     </main>
   )
