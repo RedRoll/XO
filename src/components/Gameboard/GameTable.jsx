@@ -6,7 +6,7 @@ const GameBoard = ({ gameTable, onSquareClick }) => {
     return (
         <ol className={styles.board}>
 
-            {gameTable.map((row, rowIndex) => <li key={rowIndex}> {/* 3 rows*/} 
+            {gameTable.map((row, rowIndex) => <li className={styles.board__wrapper} key={rowIndex}> {/* 3 rows*/} 
 
                 <ol className={styles.board__row}>
                     
