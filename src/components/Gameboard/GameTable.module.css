@@ -9,7 +9,8 @@
 
 .board__wrapper {
     width: 100%;
-
+    display: flex;
+    justify-content: center;
 }
 
 /* ____________________________________________________ */
@@ -40,8 +41,6 @@
     background-color: aliceblue;
     cursor: pointer;
     border: none;
-    /* padding: 0;
-    margin: 0; */
 }
 
 .symbol__button:before {
@@ -60,6 +59,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 30px;
+    font-family: inherit;
+    color: black;
+    font-weight: 700;
 }
 
 
@@ -69,8 +72,14 @@
     .board__row {
         width: 100%;
     }
+}
 
-    .row__symbol {
-        max-width: 23%;
+@media(max-width: 500px) {
+    .board {
+        row-gap: 10px;
+    }
+
+    .board__row {
+        column-gap: 10px;
     }
 }
