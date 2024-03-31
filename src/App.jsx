@@ -13,7 +13,7 @@ import { WINNING_COMBINATIONS } from './WINNING_COMBINATIONS'
 const INPUT_DATA = {
   player1: {
     playerName: 'Player 1',
-    playerSymbol: 'x'
+    playerSymbol: 'X'
   },
   player2: {
     playerName: 'Player 2',
@@ -65,7 +65,7 @@ const checkWinningCombinations = (gameTable, gameData) => {
 
 function App() {
 
-  let playerData = structuredClone(INPUT_DATA)
+  let playerData = structuredClone(INPUT_DATA)// deep copy...
 
   const [player, setPlayer] = useState(playerData) // player data (current symbol, name....))
 
@@ -87,8 +87,6 @@ function App() {
     })
   }
 
-  console.log(gameSquareData.length)
-
   const gameTable = setGameTable(gameSquareData) // re-run every time the state changes
 
   const winner = checkWinningCombinations(gameTable, gameSquareData)// checking for winning combinations in gameTable
@@ -98,6 +96,8 @@ function App() {
   const closeHandlerPopUp = () =>  setGameSquareData( () => [] ) //close popUp + reset gameTable
 
   const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
+
+  console.log(player.toggle)
 
   return (
     <main className={styles.wrapper}>
@@ -109,8 +109,8 @@ function App() {
 
         <div className={styles.game__players}>
           
-          <Player toggleValue={player.toggle} id='player1' name='Player 1' symbol='X' player={player.player1} setPlayer={setPlayer} />
-          <Player toggleValue={player.toggle} id='player2' name='Player 2' symbol='O' player={player.player2} setPlayer={setPlayer} />
+          <Player toggleValue={player.toggle} id='player1' name='Player 1' symbol='X' player={player.player1} setPlayer={setPlayer} activeP={activePlayer} />
+          <Player toggleValue={player.toggle} id='player2' name='Player 2' symbol='O' player={player.player2} setPlayer={setPlayer} activeP={activePlayer} />
 
         </div>
         {/* <PlayerLine /> */}

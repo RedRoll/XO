@@ -6,8 +6,17 @@
     padding: 10px;
     max-width: 250px;
     width: 100%;
+    border: 1px solid transparent;
+    border-radius: 3px;
 }
 
+.active-player {
+    
+    
+    animation-name: borderAnimation;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+}
 
 input {
     font-size: 16px;
@@ -36,6 +45,15 @@ input:focus.animated-input {
     max-width: 50px;
     width: 100%;
     font-family: inherit;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    transition: background-color .3s ease;
+}
+
+.player__button:disabled {
+    background-color: transparent;
 }
 
 .popUp {
@@ -65,13 +83,12 @@ input:focus.animated-input {
 
 /* player name/symbol */
 
-.player__name, .player__symbol {
+.player__name,
+.player__symbol {
     color: red;
 }
 
-/* .player__name {
-    white-space: nowrap;
-} */
+
 
 .player__nameText {
     padding: 5px 0px;
@@ -81,6 +98,12 @@ input:focus.animated-input {
     width: 100%;
     border: 1px solid transparent;
     white-space: nowrap;
+    color: white;
+    transition: color .3s ease;
+}
+
+.player__nameText-disabled {
+    color: rgb(101, 101, 101);
 }
 
 /* input animation */
@@ -101,10 +124,27 @@ input:focus.animated-input {
     0% {
         color: white;
     }
+
     50% {
-        color: red;
+        color: rgb(213, 208, 208);
     }
+
     100% {
         color: white;
     }
 }
+
+@keyframes borderAnimation {
+    0% {
+      border-color: white; /* Start with red border */
+    }
+    50% {
+      border-color: violet; /* Transition to green border */
+    }
+    75% {
+      border-color: rgb(220, 58, 220); /* Transition to blue border */
+    }
+    100% {
+        border-color: white;
+    }
+  }

@@ -14,8 +14,9 @@ const GameBoard = ({ gameTable, onSquareClick }) => {
 
                         <button onClick={() => onSquareClick(rowIndex, colIndex)} className={styles.symbol__button} disabled={symbol !== null}>
                             <span className={styles.button__item}>
-                                {/* <span className={styles.item__inner}>{symbol}</span> */}
+
                                 {symbol}
+                                
                             </span>
                         </button> {/*cell in item*/}
 

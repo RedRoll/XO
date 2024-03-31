@@ -33,6 +33,12 @@
     
 }
 
+/* ______________________ */
+
+.active-player {
+    border: 1px solid red;
+}
+
 @media (max-width:991.98px) {
     .game__players {
         flex-direction: column;

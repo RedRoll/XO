@@ -2,7 +2,7 @@ import styles from './Player.module.css'
 
 import { useState } from 'react'
 
-const Player = ({ name, symbol, id, player, toggleValue, setPlayer }) => {
+const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP }) => {
 
 
     const [toggle, setToggle] = useState({
@@ -81,10 +81,11 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer }) => {
 
     const isTrue = toggleValue !== id && toggleValue.length > 0 // for switch button disable/enable
 
+    const disabledClass = isTrue ? styles['player__nameText-disabled'] : undefined
 
     return (
 
-        <div className={styles.player}>
+        <div className={`${styles.player} ${activeP === id ? styles['active-player'] : undefined}`}>
 
             <button disabled={isTrue} className={styles.player__button} onClick={clickHandlerButton} >{toggle.input ? 'Save' : 'Edit'}</button>
 
@@ -97,7 +98,7 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer }) => {
 
                     :
 
-                    <span className={styles.player__nameText}>{player.playerName.length <= 0 ? name : player.playerName}</span>
+                    <span className={`${styles.player__nameText} ${disabledClass}`}>{player.playerName.length <= 0 ? name : player.playerName}</span>
 
             }
 
@@ -107,7 +108,7 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer }) => {
 
                 :
 
-                <span className={styles.player__nameText}>{player.playerSymbol.length <= 0 ? symbol : player.playerSymbol}</span>}
+                <span className={`${styles.player__nameText} ${disabledClass}`}>{player.playerSymbol.length <= 0 ? symbol : player.playerSymbol}</span>}
 
 
 
