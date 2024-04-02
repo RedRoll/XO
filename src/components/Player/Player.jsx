@@ -85,7 +85,7 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP }) =
 
     return (
 
-        <div className={`${styles.player} ${activeP === id ? styles['active-player'] : undefined}`}>
+        <div className={`${styles.player} ${activeP && activeP === id ? styles['active-player'] : undefined}`}>
 
             <button disabled={isTrue} className={styles.player__button} onClick={clickHandlerButton} >{toggle.input ? 'Save' : 'Edit'}</button>
 

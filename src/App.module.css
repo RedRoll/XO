@@ -39,6 +39,15 @@
     border: 1px solid red;
 }
 
+.start-button {
+    border: none;
+}
+
+.start-button:disabled {
+    background-color: transparent;
+    border: none;
+}
+
 @media (max-width:991.98px) {
     .game__players {
         flex-direction: column;

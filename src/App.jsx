@@ -1,6 +1,6 @@
 import styles from './App.module.css'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 import Player from './components/Player/Player'
 import GameTable from './components/Gameboard/GameTable'
@@ -33,8 +33,8 @@ const setGameTable = data => {
   const gameTable = [...DEFAULT_GAMETABLE.map(item => [...item])] // deep cloning
 
   for (const item of data) {
-    const {curSymbol, square} = item
-    const {row, col} = square
+    const { curSymbol, square } = item
+    const { row, col } = square
     gameTable[row][col] = curSymbol
   }
 
@@ -46,14 +46,14 @@ const checkWinningCombinations = (gameTable, gameData) => {
 
   let winner
 
-  for(const item of WINNING_COMBINATIONS) {
+  for (const item of WINNING_COMBINATIONS) {
 
     let firstCell = gameTable[item[0].row][item[0].column]
     let secondtCell = gameTable[item[1].row][item[1].column]
     let thirdCell = gameTable[item[2].row][item[2].column]
 
-    if(firstCell && firstCell === secondtCell && firstCell === thirdCell) {
-      winner = gameData[gameData.length -1].curSymbol
+    if (firstCell && firstCell === secondtCell && firstCell === thirdCell) {
+      winner = gameData[gameData.length - 1].curSymbol
     }
 
   }
@@ -65,18 +65,22 @@ const checkWinningCombinations = (gameTable, gameData) => {
 
 function App() {
 
+  const startButtonRef = useRef(null)
+
   let playerData = structuredClone(INPUT_DATA)// deep copy...
 
   const [player, setPlayer] = useState(playerData) // player data (current symbol, name....))
 
-  const [activePlayer, setActivePlayer] = useState('player1') // current active Player (in this moment)
+  const [activePlayer, setActivePlayer] = useState('') // current active Player (in this moment)
 
   const [gameSquareData, setGameSquareData] = useState([]) // logs of all clicks with playerName, symbol etc
 
-// handling player clicks on gameTable cells
+  // handling player clicks on gameTable cells
   const getDataOnClick = (rowIndex, colIndex) => {
-   
+
     setActivePlayer(() => activePlayer === 'player1' ? 'player2' : 'player1')
+
+    // setActivePlayer(() =>  activePlayer === '' ? 'player1' : activePlayer === 'player2' ? 'player1' : 'player2')
 
     setGameSquareData(prevState => {
       // let namePlayer = player[activePlayer].playerName
@@ -87,17 +91,43 @@ function App() {
     })
   }
 
+  console.log(activePlayer)
+
   const gameTable = setGameTable(gameSquareData) // re-run every time the state changes
 
   const winner = checkWinningCombinations(gameTable, gameSquareData)// checking for winning combinations in gameTable
 
-  const clickHandlerReset = () => setPlayer(() => playerData) // reset data on button 'reset' click
+  const clickHandlerReset = (event) => {
 
-  const closeHandlerPopUp = () =>  setGameSquareData( () => [] ) //close popUp + reset gameTable
+    if (activePlayer) {
+
+      setPlayer(() => playerData)
+      setActivePlayer(() => '') // when game is started
+      setGameSquareData(() => [])
+      startButtonRef.current.style.color = 'black'
+      startButtonRef.current.disabled = false
+      startButtonRef.current.textContent = 'Start game!'
+
+    }
+    if (!activePlayer) {
+      setPlayer(() => playerData) // when game not started yet
+    }
+
+  } // reset data on button 'reset' click
+
+  const closeHandlerPopUp = () => setGameSquareData(() => []) //close popUp + reset gameTable
+
+  const handleStartClick = () => {
+    setActivePlayer(() => 'player1')
+    // document.getElementsByClassName(`styles['start-button']`).style.color = 'red'
+    startButtonRef.current.style.color = 'red'
+    startButtonRef.current.disabled = true
+    startButtonRef.current.textContent = 'Game Started!'
+  } // start game handler
 
   const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
 
-  console.log(player.toggle)
+  console.log(startButtonRef)
 
   return (
     <main className={styles.wrapper}>
@@ -108,14 +138,16 @@ function App() {
       <div className={styles['game-wrapper']}>
 
         <div className={styles.game__players}>
-          
+
           <Player toggleValue={player.toggle} id='player1' name='Player 1' symbol='X' player={player.player1} setPlayer={setPlayer} activeP={activePlayer} />
           <Player toggleValue={player.toggle} id='player2' name='Player 2' symbol='O' player={player.player2} setPlayer={setPlayer} activeP={activePlayer} />
 
         </div>
         {/* <PlayerLine /> */}
 
-        <GameTable gameTable={gameTable} onSquareClick={getDataOnClick} />
+        <button ref={startButtonRef} className={styles['start-button']} onClick={handleStartClick}>Start game!</button>
+
+        <GameTable gameTable={gameTable} onSquareClick={getDataOnClick} active={activePlayer} />
 
 
         <button onClick={clickHandlerReset} >Reset</button>

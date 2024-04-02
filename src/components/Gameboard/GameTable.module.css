@@ -43,6 +43,10 @@
     border: none;
 }
 
+.symbol__button:disabled {
+    cursor: not-allowed;
+}
+
 .symbol__button:before {
     content: "";
     display: block;
