@@ -5,6 +5,7 @@
     flex-direction: column;
     row-gap: 20px;
     margin: 50px 0;
+    width: 100%; /*не забувати вказувати довжину батьківського елменту на 100%(якщо це потрібно), бо при justify-content/align-items може зжимати блок і весь його вміст*/
 }
 
 .board__wrapper {

@@ -107,7 +107,7 @@ function App() {
       startButtonRef.current.style.color = 'black'
       startButtonRef.current.disabled = false
       startButtonRef.current.textContent = 'Start game!'
-
+      startButtonRef.current.style.cursor = 'pointer'
     }
     if (!activePlayer) {
       setPlayer(() => playerData) // when game not started yet
@@ -123,6 +123,7 @@ function App() {
     startButtonRef.current.style.color = 'red'
     startButtonRef.current.disabled = true
     startButtonRef.current.textContent = 'Game Started!'
+    startButtonRef.current.style.cursor = 'default'
   } // start game handler
 
   const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
@@ -150,7 +151,7 @@ function App() {
         <GameTable gameTable={gameTable} onSquareClick={getDataOnClick} active={activePlayer} />
 
 
-        <button onClick={clickHandlerReset} >Reset</button>
+        <button className={styles['reset-button']} onClick={clickHandlerReset} >Reset</button>
 
         <Log data={gameSquareData} />
       </div>

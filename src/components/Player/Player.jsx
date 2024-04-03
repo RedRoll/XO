@@ -116,9 +116,9 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP }) =
 
                 <div className={styles.popUp}>
                     <div className={styles.popUp__content}>
-                        <h2>Popup Title</h2>
-                        <p>This is the content of the popup.</p>
-                        <button onClick={handlerClosePopUp}>Close</button>
+                        <h2>Warning!</h2>
+                        <p>You must enter your name and symbol.</p>
+                        <button className={styles.popUp__button} onClick={handlerClosePopUp}>I understand</button>
                     </div>
                 </div>
 
