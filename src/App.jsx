@@ -65,7 +65,7 @@ const checkWinningCombinations = (gameTable, gameData) => {
 
 function App() {
 
-  const startButtonRef = useRef(null)
+  const startButtonRef = useRef(null) // to interact with the button without the state
 
   let playerData = structuredClone(INPUT_DATA)// deep copy...
 
@@ -97,17 +97,14 @@ function App() {
 
   const winner = checkWinningCombinations(gameTable, gameSquareData)// checking for winning combinations in gameTable
 
-  const clickHandlerReset = (event) => {
+  const clickHandlerReset = () => {
 
     if (activePlayer) {
 
       setPlayer(() => playerData)
       setActivePlayer(() => '') // when game is started
       setGameSquareData(() => [])
-      startButtonRef.current.style.color = 'black'
-      startButtonRef.current.disabled = false
-      startButtonRef.current.textContent = 'Start game!'
-      startButtonRef.current.style.cursor = 'pointer'
+    
     }
     if (!activePlayer) {
       setPlayer(() => playerData) // when game not started yet
@@ -119,11 +116,6 @@ function App() {
 
   const handleStartClick = () => {
     setActivePlayer(() => 'player1')
-    // document.getElementsByClassName(`styles['start-button']`).style.color = 'red'
-    startButtonRef.current.style.color = 'red'
-    startButtonRef.current.disabled = true
-    startButtonRef.current.textContent = 'Game Started!'
-    startButtonRef.current.style.cursor = 'default'
   } // start game handler
 
   const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
@@ -146,7 +138,8 @@ function App() {
         </div>
         {/* <PlayerLine /> */}
 
-        <button ref={startButtonRef} className={styles['start-button']} onClick={handleStartClick}>Start game!</button>
+        {/* mark useRef */}
+        {!activePlayer ? <button ref={startButtonRef} className={styles['start-button']} onClick={handleStartClick}>Start game!</button> : <p className={styles['start-text']}>Game Started!</p> }
 
         <GameTable gameTable={gameTable} onSquareClick={getDataOnClick} active={activePlayer} />
 

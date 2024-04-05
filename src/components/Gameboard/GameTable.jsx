@@ -6,6 +6,8 @@ const GameBoard = ({ gameTable, onSquareClick, active }) => {
     return (
         <ol className={styles.board}>
 
+       
+
             {gameTable.map((row, rowIndex) => <li className={styles.board__wrapper} key={rowIndex}> {/* 3 rows*/}
 
                 <ol className={styles.board__row}>
@@ -16,7 +18,7 @@ const GameBoard = ({ gameTable, onSquareClick, active }) => {
                             <span className={styles.button__item}>
 
                                 {symbol}
-                                
+
                             </span>
                         </button> {/*cell in item*/}
 
@@ -25,6 +27,8 @@ const GameBoard = ({ gameTable, onSquareClick, active }) => {
                 </ol>
 
             </li>)}
+
+           
 
         </ol>
     )
