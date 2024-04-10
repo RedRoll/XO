@@ -1,11 +1,12 @@
 import styles from './App.module.css'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 import Player from './components/Player/Player'
 import GameTable from './components/Gameboard/GameTable'
 import PopUp from './components/PopUp/PopUp'
 import Log from './components/Log/Log'
+import GameStats from './components/GameStats/GameStats'
 
 import logo from './assets/LOGO.png'
 import { WINNING_COMBINATIONS } from './WINNING_COMBINATIONS'
@@ -13,13 +14,16 @@ import { WINNING_COMBINATIONS } from './WINNING_COMBINATIONS'
 const INPUT_DATA = {
   player1: {
     playerName: 'Player 1',
-    playerSymbol: 'X'
+    playerSymbol: 'X',
+    playerWins: 0
   },
   player2: {
     playerName: 'Player 2',
-    playerSymbol: 'O'
+    playerSymbol: 'O',
+    playerWins: 0
   },
   toggle: ''
+
 }
 
 const DEFAULT_GAMETABLE = [
@@ -53,19 +57,17 @@ const checkWinningCombinations = (gameTable, gameData) => {
     let thirdCell = gameTable[item[2].row][item[2].column]
 
     if (firstCell && firstCell === secondtCell && firstCell === thirdCell) {
-      winner = gameData[gameData.length - 1].curSymbol
+      winner = gameData[gameData.length - 1].curName
+
     }
 
   }
-
   return winner //if winner = true (symbol for example 'X') => popUp opens (popUP will depend by the variable winner)
-
 }
-
 
 function App() {
 
-  const startButtonRef = useRef(null) // to interact with the button without the state
+  // let wins = 1
 
   let playerData = structuredClone(INPUT_DATA)// deep copy...
 
@@ -75,27 +77,29 @@ function App() {
 
   const [gameSquareData, setGameSquareData] = useState([]) // logs of all clicks with playerName, symbol etc
 
+ 
+
   // handling player clicks on gameTable cells
   const getDataOnClick = (rowIndex, colIndex) => {
 
     setActivePlayer(() => activePlayer === 'player1' ? 'player2' : 'player1')
 
-    // setActivePlayer(() =>  activePlayer === '' ? 'player1' : activePlayer === 'player2' ? 'player1' : 'player2')
-
     setGameSquareData(prevState => {
       // let namePlayer = player[activePlayer].playerName
       let symbolPlayer = player[activePlayer].playerSymbol
-      let playerTurnsData = [...prevState, { curSymbol: symbolPlayer, square: { row: rowIndex, col: colIndex } }]
+      let namePlayer = player[activePlayer].playerName
+      let playerTurnsData = [...prevState, { curName: namePlayer, curSymbol: symbolPlayer, square: { row: rowIndex, col: colIndex } }]
 
       return playerTurnsData
     })
   }
 
-  console.log(activePlayer)
-
   const gameTable = setGameTable(gameSquareData) // re-run every time the state changes
 
-  const winner = checkWinningCombinations(gameTable, gameSquareData)// checking for winning combinations in gameTable
+  const winner1 = checkWinningCombinations(gameTable, gameSquareData)// checking for winning combinations in gameTable
+
+
+  console.log(winner1)
 
   const clickHandlerReset = () => {
 
@@ -104,7 +108,7 @@ function App() {
       setPlayer(() => playerData)
       setActivePlayer(() => '') // when game is started
       setGameSquareData(() => [])
-    
+
     }
     if (!activePlayer) {
       setPlayer(() => playerData) // when game not started yet
@@ -112,7 +116,22 @@ function App() {
 
   } // reset data on button 'reset' click
 
-  const closeHandlerPopUp = () => setGameSquareData(() => []) //close popUp + reset gameTable
+  const closeHandlerPopUp = () => {
+    
+    setGameSquareData(() => [])
+
+    setPlayer(prevState => {
+      return {
+          ...prevState,
+          [activePlayer]: {
+              ...prevState[activePlayer],
+              playerWins: prevState[activePlayer].playerWins + 1 // значення nan
+          }
+
+      }
+  })
+
+  } //close popUp + reset gameTable
 
   const handleStartClick = () => {
     setActivePlayer(() => 'player1')
@@ -120,7 +139,7 @@ function App() {
 
   const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
 
-  console.log(startButtonRef)
+
 
   return (
     <main className={styles.wrapper}>
@@ -138,8 +157,9 @@ function App() {
         </div>
         {/* <PlayerLine /> */}
 
-        {/* mark useRef */}
-        {!activePlayer ? <button ref={startButtonRef} className={styles['start-button']} onClick={handleStartClick}>Start game!</button> : <p className={styles['start-text']}>Game Started!</p> }
+        <GameStats player={player} />
+
+        {!activePlayer ? <button className={styles['start-button']} onClick={handleStartClick}>Start game!</button> : <p className={styles['start-text']}>Game Started!</p>}
 
         <GameTable gameTable={gameTable} onSquareClick={getDataOnClick} active={activePlayer} />
 
@@ -149,7 +169,7 @@ function App() {
         <Log data={gameSquareData} />
       </div>
       {/* end main conatiner */}
-      <PopUp winner={winner} onClosePopUp={closeHandlerPopUp} draw={gameDraw} />
+      <PopUp winner={winner1} onClosePopUp={closeHandlerPopUp} draw={gameDraw} />
 
     </main>
   )
