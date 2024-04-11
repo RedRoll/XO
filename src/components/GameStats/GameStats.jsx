@@ -7,9 +7,10 @@ const GameStats = props => {
         <div>
 
             <span>
-                <p>{props.player.player1.playerName}: {props.player.player1.playerWins}</p>
-                <p>{props.player.player2.playerName}: {props.player.player2.playerWins}</p>
-                {/* <p>Player 2 wins: {player2}</p> */}
+                
+                <p>{props.player.player1.playerName}: {props.player.player2.playerWins}</p> {/* значення стоять навпаки (player2/player1) бо коли викликається функція зміни стану виграшів (setPlayer) activePlayer стоїть на крок попереду(activePlayer змінюється на наступний стан ще перед викликом setPlayer)  */}
+                <p>{props.player.player2.playerName}: {props.player.player1.playerWins}</p>
+                
             </span>
             
         </div>

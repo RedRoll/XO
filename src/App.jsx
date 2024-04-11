@@ -62,6 +62,7 @@ const checkWinningCombinations = (gameTable, gameData) => {
     }
 
   }
+
   return winner //if winner = true (symbol for example 'X') => popUp opens (popUP will depend by the variable winner)
 }
 
@@ -77,12 +78,18 @@ function App() {
 
   const [gameSquareData, setGameSquareData] = useState([]) // logs of all clicks with playerName, symbol etc
 
- 
+  let playerInfo = []
 
   // handling player clicks on gameTable cells
   const getDataOnClick = (rowIndex, colIndex) => {
 
     setActivePlayer(() => activePlayer === 'player1' ? 'player2' : 'player1')
+
+    playerInfo.push(activePlayer)
+
+    // setActivePlayer(prevState => prevState.activePlayer === 'player1' ? prevState.activePlayer.push('player2') : prevState.activePlayer.push('player1'))
+
+    // winner === undefined ? setActivePlayer(() => activePlayer === 'player1' ? 'player2' : 'player1') : undefined
 
     setGameSquareData(prevState => {
       // let namePlayer = player[activePlayer].playerName
@@ -96,10 +103,13 @@ function App() {
 
   const gameTable = setGameTable(gameSquareData) // re-run every time the state changes
 
-  const winner1 = checkWinningCombinations(gameTable, gameSquareData)// checking for winning combinations in gameTable
+  // const winner1 = checkWinningCombinations(gameTable, gameSquareData, setPlayer, activePlayer)// checking for winning combinations in gameTable
 
+  const winner1 = checkWinningCombinations(gameTable, gameSquareData);
 
-  console.log(winner1)
+  console.log(player)
+  console.log(winner1 === undefined)
+
 
   const clickHandlerReset = () => {
 
@@ -117,19 +127,16 @@ function App() {
   } // reset data on button 'reset' click
 
   const closeHandlerPopUp = () => {
-    
+
     setGameSquareData(() => [])
 
-    setPlayer(prevState => {
-      return {
-          ...prevState,
-          [activePlayer]: {
-              ...prevState[activePlayer],
-              playerWins: prevState[activePlayer].playerWins + 1 // значення nan
-          }
-
+    setPlayer(prevState => ({
+      ...prevState,
+      [activePlayer]: {
+        ...prevState[activePlayer],
+        playerWins: prevState[activePlayer].playerWins + 1
       }
-  })
+    }))
 
   } //close popUp + reset gameTable
 
@@ -139,7 +146,8 @@ function App() {
 
   const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
 
-
+  // const selector = gameSquareData[gameSquareData.length -1].curName
+  // console.log(selector)
 
   return (
     <main className={styles.wrapper}>

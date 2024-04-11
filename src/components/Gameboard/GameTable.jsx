@@ -1,7 +1,7 @@
 import styles from './GameTable.module.css'
 
 
-const GameBoard = ({ gameTable, onSquareClick, active }) => {
+const GameBoard = ({ gameTable, onSquareClick, active}) => {
 
     return (
         <ol className={styles.board}>
