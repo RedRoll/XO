@@ -68,8 +68,6 @@ const checkWinningCombinations = (gameTable, gameData) => {
 
 function App() {
 
-  // let wins = 1
-
   let playerData = structuredClone(INPUT_DATA)// deep copy...
 
   const [player, setPlayer] = useState(playerData) // player data (current symbol, name....))
@@ -78,18 +76,10 @@ function App() {
 
   const [gameSquareData, setGameSquareData] = useState([]) // logs of all clicks with playerName, symbol etc
 
-  let playerInfo = []
-
   // handling player clicks on gameTable cells
   const getDataOnClick = (rowIndex, colIndex) => {
 
     setActivePlayer(() => activePlayer === 'player1' ? 'player2' : 'player1')
-
-    playerInfo.push(activePlayer)
-
-    // setActivePlayer(prevState => prevState.activePlayer === 'player1' ? prevState.activePlayer.push('player2') : prevState.activePlayer.push('player1'))
-
-    // winner === undefined ? setActivePlayer(() => activePlayer === 'player1' ? 'player2' : 'player1') : undefined
 
     setGameSquareData(prevState => {
       // let namePlayer = player[activePlayer].playerName
@@ -103,13 +93,7 @@ function App() {
 
   const gameTable = setGameTable(gameSquareData) // re-run every time the state changes
 
-  // const winner1 = checkWinningCombinations(gameTable, gameSquareData, setPlayer, activePlayer)// checking for winning combinations in gameTable
-
   const winner1 = checkWinningCombinations(gameTable, gameSquareData);
-
-  console.log(player)
-  console.log(winner1 === undefined)
-
 
   const clickHandlerReset = () => {
 
@@ -145,9 +129,6 @@ function App() {
   } // start game handler
 
   const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
-
-  // const selector = gameSquareData[gameSquareData.length -1].curName
-  // console.log(selector)
 
   return (
     <main className={styles.wrapper}>
