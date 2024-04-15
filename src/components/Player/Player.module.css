@@ -1,18 +1,21 @@
 /* main container - player */
 .player {
+    box-sizing: content-box;
     display: flex;
     column-gap: 15px;
     align-items: center;
     padding: 10px;
-    max-width: 250px;
-    width: 100%;
+    width: 210px;
     border: 1px solid transparent;
     border-radius: 3px;
+    /* border: 1px solid white; */
+    overflow: hidden;
+    border: 1px solid white;
 }
 
 .active-player {
-    
-    
+
+
     animation-name: borderAnimation;
     animation-duration: .5s;
     animation-iteration-count: infinite;
@@ -20,15 +23,17 @@
 
 input {
     font-size: 16px;
-    height: auto;
-    max-width: 70px;
-    width: 100%;
+    /* padding-right: 1px; */
+
+    text-transform: uppercase;
+    overflow: hidden;
+    width: 100px;
     background-color: transparent;
     color: white;
     border: none;
     font-family: inherit;
     outline: none;
-    padding: 5px;
+    /* padding: 5px; */
     border: 1px solid transparent;
 }
 
@@ -42,8 +47,8 @@ input:focus.animated-input {
 
 .player__button {
     padding: 5px 10px;
-    max-width: 50px;
-    width: 100%;
+    min-width: 50px;
+
     font-family: inherit;
     text-transform: uppercase;
     font-weight: 700;
@@ -86,18 +91,23 @@ input:focus.animated-input {
 
 /* player name/symbol */
 
-.player__name,
-.player__symbol {
+.player__input {
+    display: flex;
+    gap: 7px;
+}
+
+.input__name,
+.input__symbol {
     color: red;
 }
 
 
+.input__nameText {
 
-.player__nameText {
-    padding: 5px 0px;
     font-family: inherit;
-    max-width: 70px;
-    padding: 5px;
+    max-width: 100px;
+    font-size: 16px;
+    overflow: hidden;
     width: 100%;
     border: 1px solid transparent;
     white-space: nowrap;
@@ -106,7 +116,7 @@ input:focus.animated-input {
     text-transform: uppercase;
 }
 
-.player__nameText-disabled {
+.input__nameText-disabled {
     color: rgb(101, 101, 101);
 }
 
@@ -140,21 +150,27 @@ input:focus.animated-input {
 
 @keyframes borderAnimation {
     0% {
-      border-color: white; /* Start with red border */
+        border-color: white;
+        /* Start with red border */
     }
+
     50% {
-      border-color: violet; /* Transition to green border */
+        border-color: violet;
+        /* Transition to green border */
     }
+
     75% {
-      border-color: rgb(220, 58, 220); /* Transition to blue border */
+        border-color: rgb(220, 58, 220);
+        /* Transition to blue border */
     }
+
     100% {
         border-color: white;
     }
-  }
+}
 
-  /* pop up */
+/* pop up */
 
-  .popUp__button {
+.popUp__button {
     cursor: pointer;
-  }
+}
