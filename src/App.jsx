@@ -130,6 +130,7 @@ function App() {
 
   const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
 
+  console.log(activePlayer)
   return (
     <main className={styles.wrapper}>
 

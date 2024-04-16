@@ -174,3 +174,16 @@ input:focus.animated-input {
 .popUp__button {
     cursor: pointer;
 }
+
+@media (max-width: 400px) {
+
+    .player {
+        
+        width: 100%;
+    }
+
+    .player__button {
+        width: 100px;
+        padding: 12px 10px;
+    }
+}

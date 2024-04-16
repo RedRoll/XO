@@ -81,14 +81,16 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP }) =
 
     const isTrue = toggleValue !== id && toggleValue.length > 0 // for switch button disable/enable
 
+    const isGameStarted = activeP // disable all buttons when game started
+
     const disabledClass = isTrue ? styles['input__nameText-disabled'] : undefined
 
-    
+  
     return (
 
         <div className={`${styles.player} ${activeP && activeP === id ? styles['active-player'] : undefined}`}>
 
-            <button disabled={isTrue} className={styles.player__button} onClick={clickHandlerButton} >{toggle.input ? 'Save' : 'Edit'}</button>
+            <button disabled={isTrue || isGameStarted} className={styles.player__button} onClick={clickHandlerButton} >{toggle.input ? 'Save' : 'Edit'}</button>
 
 
             <div className={styles['players-box']}>
