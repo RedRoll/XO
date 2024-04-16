@@ -8,6 +8,10 @@
     margin-bottom: 15px;
 }
 
+.log__menu {
+  max-height: 144px;
+  overflow-y: scroll;
+}
 
 .menu__item {
     animation-name: slide-in-from-left;

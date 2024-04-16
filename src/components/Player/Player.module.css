@@ -120,6 +120,10 @@ input:focus.animated-input {
     color: rgb(101, 101, 101);
 }
 
+.input__paragraph {
+    /* color: white; */
+    transition: color .3s ease;
+}
 /* input animation */
 
 .animated-input {
@@ -183,7 +187,12 @@ input:focus.animated-input {
     }
 
     .player__button {
-        width: 100px;
+        min-width: 100px;
         padding: 12px 10px;
+    }
+
+    input {
+        max-width: 100px;
+        width: 100%;
     }
 }

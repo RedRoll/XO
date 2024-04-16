@@ -96,7 +96,7 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP }) =
             <div className={styles['players-box']}>
 
                 <span className={styles.player__input}>
-                    <p>Name:</p>
+                    <p className={`${styles.input__paragraph} ${disabledClass}`}>Name:</p>
                     {
 
                         toggle.input ? // name
@@ -111,7 +111,7 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP }) =
                 </span>
 
                 <span className={styles.player__input}>
-                    <p>Symbol:</p>
+                    <p className={`${disabledClass} ${styles.input__paragraph}`}>Symbol:</p>
                     {toggle.input ? // symbol
 
                         <input className={`${styles.input__symbol} ${animationClass}`} value={player.playerSymbol} type="text" onChange={event => changeHandler(event, Object.keys(player)[1])} onClick={() => clickHandlerInput(Object.keys(player)[1])} placeholder='Symbol' required />
