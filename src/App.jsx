@@ -23,7 +23,6 @@ const INPUT_DATA = {
     playerWins: 0
   },
   toggle: ''
-
 }
 
 const DEFAULT_GAMETABLE = [
@@ -76,6 +75,8 @@ function App() {
 
   const [gameSquareData, setGameSquareData] = useState([]) // logs of all clicks with playerName, symbol etc
 
+  const [reset, setReset] = useState(false) // state for reset button when the game is not started yet
+
   // handling player clicks on gameTable cells
   const getDataOnClick = (rowIndex, colIndex) => {
 
@@ -102,13 +103,17 @@ function App() {
       setPlayer(() => playerData)
       setActivePlayer(() => '') // when game is started
       setGameSquareData(() => [])
+      setReset( item => !item )
 
     }
     if (!activePlayer) {
       setPlayer(() => playerData) // when game not started yet
+      setReset( item => !item )
     }
 
   } // reset data on button 'reset' click
+  console.log(reset)
+  console.log(player)
 
   const closeHandlerPopUp = () => {
 
@@ -130,7 +135,7 @@ function App() {
 
   const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
 
-  console.log(activePlayer)
+
   return (
     <main className={styles.wrapper}>
 
@@ -141,8 +146,8 @@ function App() {
 
         <div className={styles.game__players}>
 
-          <Player toggleValue={player.toggle} id='player1' name='Player 1' symbol='X' player={player.player1} setPlayer={setPlayer} activeP={activePlayer} />
-          <Player toggleValue={player.toggle} id='player2' name='Player 2' symbol='O' player={player.player2} setPlayer={setPlayer} activeP={activePlayer} />
+          <Player toggleValue={player.toggle} id='player1' name='Player 1' symbol='X' player={player.player1} setPlayer={setPlayer} activeP={activePlayer} isReset={reset} />
+          <Player toggleValue={player.toggle} id='player2' name='Player 2' symbol='O' player={player.player2} setPlayer={setPlayer} activeP={activePlayer} isReset={reset} />
 
         </div>
         {/* <PlayerLine /> */}

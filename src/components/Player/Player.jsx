@@ -1,8 +1,8 @@
 import styles from './Player.module.css'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP }) => {
+const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP, isReset}) => {
 
 
     const [toggle, setToggle] = useState({
@@ -11,6 +11,17 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP }) =
         popUp: false
     })
 
+    useEffect( () => {
+
+        setToggle( prevState => {
+            return {
+                ...prevState,
+                input: false // не запускає цей кусок, коли нижимається reset кнопка (при ще не початій грі), бо reset кнопка обнуляє activeP, а при не початій грі немає що обнуляти бо дані в activeP і так стандартні. придумати щось....
+                // додав стан для reset кнопки і просто його змінюю при натисканні на кнопку
+            }
+        } )
+
+    }, [isReset] )
 
     const changeHandler = (event, data) => {
         setPlayer(prevState => {
@@ -79,18 +90,24 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP }) =
 
     const animationClass = toggle.input ? styles['animated-input'] : undefined
 
-    const isTrue = toggleValue !== id && toggleValue.length > 0 // for switch button disable/enable
+
 
     const isGameStarted = activeP // disable all buttons when game started
 
+    // rule - !isGameStarted for the case when the edit button is pressed and the player presses the start button
+    const isTrue = toggleValue !== id && toggleValue && !isGameStarted // for switch button disable/enable
+
     const disabledClass = isTrue ? styles['input__nameText-disabled'] : undefined
 
-  
+
     return (
 
         <div className={`${styles.player} ${activeP && activeP === id ? styles['active-player'] : undefined}`}>
 
-            <button disabled={isTrue || isGameStarted} className={styles.player__button} onClick={clickHandlerButton} >{toggle.input ? 'Save' : 'Edit'}</button>
+            <button disabled={isTrue || isGameStarted } className={styles.player__button} onClick={clickHandlerButton} >
+                {activeP || !toggle.input ? 'Edit' : toggle.input ? 'Save' : 'Edit'}
+                
+            </button>
 
 
             <div className={styles['players-box']}>
