@@ -2,16 +2,20 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 190px;
+    max-height: 190px;
 }
 
 .log__title {
     margin-bottom: 15px;
 }
 
+.log__menu-wrapper {
+  height: 200px;
+  overflow-y: scroll;
+}
+
 .log__menu {
   padding: 0 20px;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column-reverse;
 }

@@ -13,7 +13,7 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP, isR
 
     useEffect( () => {
 
-        setToggle( prevState => {
+        setToggle( prevState => { // eventListener for reset button 
             return {
                 ...prevState,
                 input: false // не запускає цей кусок, коли нижимається reset кнопка (при ще не початій грі), бо reset кнопка обнуляє activeP, а при не початій грі немає що обнуляти бо дані в activeP і так стандартні. придумати щось....
@@ -145,7 +145,7 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP, isR
             {toggle.popUp ?
 
                 <div className={styles.popUp}>
-                    <div className={styles.popUp__content}>
+                    <div className={styles.popUp__content}>    {/*знайти цю кнопку в стилях*/}
                         <h2>Warning!</h2>
                         <p>You must enter your name and symbol.</p>
                         <button className={styles.popUp__button} onClick={handlerClosePopUp}>I understand</button>

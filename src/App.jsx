@@ -112,8 +112,7 @@ function App() {
     }
 
   } // reset data on button 'reset' click
-  console.log(reset)
-  console.log(player)
+ 
 
   const closeHandlerPopUp = () => {
 
