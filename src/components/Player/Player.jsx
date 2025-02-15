@@ -2,7 +2,7 @@ import styles from './Player.module.css'
 
 import { useState, useEffect } from 'react'
 
-const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP, isReset}) => {
+const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP, isReset, labelName, labelSymbol}) => {
 
 
     const [toggle, setToggle] = useState({
@@ -10,6 +10,8 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP, isR
         inputClicked: false,
         popUp: false
     })
+
+   
 
     useEffect( () => {
 
@@ -69,7 +71,6 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP, isR
 
         }
 
-
     }
 
     const handlerClosePopUp = () => setToggle(prevState => { return { ...prevState, popUp: !prevState.popUp } })
@@ -113,12 +114,12 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP, isR
             <div className={styles['players-box']}>
 
                 <span className={styles.player__input}>
-                    <p className={`${styles.input__paragraph} ${disabledClass}`}>Name:</p>
+                    <label htmlFor={labelName} className={`${styles.input__paragraph} ${disabledClass} ${toggle.input ? styles['animate-label'] : undefined}`}>Name:</label>
                     {
 
                         toggle.input ? // name
 
-                            <input className={`${styles.input__name} ${animationClass}`} value={player.playerName} type="text" onChange={event => changeHandler(event, Object.keys(player)[0])} onClick={() => clickHandlerInput(Object.keys(player)[0])} placeholder='Name' required maxLength={10} />
+                            <input id={labelName} className={`${styles.input__name} ${animationClass}`} value={player.playerName} type="text" onChange={event => changeHandler(event, Object.keys(player)[0])} onClick={() => clickHandlerInput(Object.keys(player)[0])} placeholder='Name' required maxLength={10} />
 
                             :
 
@@ -126,12 +127,12 @@ const Player = ({ name, symbol, id, player, toggleValue, setPlayer, activeP, isR
 
                     }
                 </span>
-
+              
                 <span className={styles.player__input}>
-                    <p className={`${disabledClass} ${styles.input__paragraph}`}>Symbol:</p>
+                    <label htmlFor={labelSymbol} className={`${disabledClass} ${styles.input__paragraph}`}>Symbol:</label>
                     {toggle.input ? // symbol
 
-                        <input className={`${styles.input__symbol} ${animationClass}`} value={player.playerSymbol} type="text" onChange={event => changeHandler(event, Object.keys(player)[1])} onClick={() => clickHandlerInput(Object.keys(player)[1])} placeholder='Symbol' required />
+                        <input id={labelSymbol} className={`${styles.input__symbol} ${animationClass}`} value={player.playerSymbol} type="text" onChange={event => changeHandler(event, Object.keys(player)[1])} onClick={() => clickHandlerInput(Object.keys(player)[1])} placeholder='Symbol' required />
 
                         :
 

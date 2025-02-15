@@ -19,5 +19,14 @@
 }
 
 .pop-up__button {
-    padding: 5px 20px;
+    padding: 5px 5px;
+    max-width: 50px;
+    width: 100%;
+    border-radius: 5px;
+    border-color: transparent;
+}
+.pop-up__button:hover {
+    cursor: pointer;
+    background-color: rgb(252, 178, 178);
+    
 }

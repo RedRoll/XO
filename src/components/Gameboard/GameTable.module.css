@@ -42,6 +42,15 @@
     background-color: aliceblue;
     cursor: pointer;
     border: none;
+    border-radius: 5px;
+}
+
+.selected-symbol__button {
+    background-color: red;
+}
+
+.enable-symbol__button:hover {
+    background-color: rgb(252, 178, 178);
 }
 
 .symbol__button:disabled {

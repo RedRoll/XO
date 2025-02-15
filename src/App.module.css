@@ -83,6 +83,12 @@
     margin-bottom: 30px;
 }
 
+.reset-button:hover {
+    background-color: red;
+    color: white;
+    transition: background-color .4s ease, color .6s ease ;
+}
+
 
 .start-button:disabled {
     background-color: transparent;

@@ -103,36 +103,42 @@ function App() {
       setPlayer(() => playerData)
       setActivePlayer(() => '') // when game is started
       setGameSquareData(() => [])
-      setReset( item => !item )
+      setReset(item => !item)
 
     }
     if (!activePlayer) {
       setPlayer(() => playerData) // when game not started yet
-      setReset( item => !item )
+      setReset(item => !item)
     }
 
   } // reset data on button 'reset' click
- 
+
+  const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
 
   const closeHandlerPopUp = () => {
 
     setGameSquareData(() => [])
 
-    setPlayer(prevState => ({
-      ...prevState,
-      [activePlayer]: {
-        ...prevState[activePlayer],
-        playerWins: prevState[activePlayer].playerWins + 1
-      }
-    }))
+    if (winner1) { // if someone wins
+      setPlayer(prevState => ({
+        ...prevState,
+        [activePlayer]: {
+          ...prevState[activePlayer],
+          playerWins: prevState[activePlayer].playerWins + 1
+        }
+      }))
+    }
 
-  } //close popUp + reset gameTable
+  } //close popUp + reset gameTable 
+
 
   const handleStartClick = () => {
-    setActivePlayer(() => 'player1')
+    if(player.toggle.length <= 0) {
+      setActivePlayer(() => 'player1')
+    }
   } // start game handler
 
-  const gameDraw = gameSquareData.length === 9 // opens popUp if the result of the game is a draw
+
 
 
   return (
@@ -145,8 +151,8 @@ function App() {
 
         <div className={styles.game__players}>
 
-          <Player toggleValue={player.toggle} id='player1' name='Player 1' symbol='X' player={player.player1} setPlayer={setPlayer} activeP={activePlayer} isReset={reset} />
-          <Player toggleValue={player.toggle} id='player2' name='Player 2' symbol='O' player={player.player2} setPlayer={setPlayer} activeP={activePlayer} isReset={reset} />
+          <Player labelName='name' labelSymbol='symbol' toggleValue={player.toggle} id='player1' name='Player 1' symbol='X' player={player.player1} setPlayer={setPlayer} activeP={activePlayer} isReset={reset} />
+          <Player labelName='name1' labelSymbol='symbol1' toggleValue={player.toggle} id='player2' name='Player 2' symbol='O' player={player.player2} setPlayer={setPlayer} activeP={activePlayer} isReset={reset} />
 
         </div>
         {/* <PlayerLine /> */}
@@ -155,7 +161,7 @@ function App() {
 
         {!activePlayer ? <button className={styles['start-button']} onClick={handleStartClick}>Start game!</button> : <p className={styles['start-text']}>Game Started!</p>}
 
-        <GameTable gameTable={gameTable} onSquareClick={getDataOnClick} active={activePlayer} />
+        <GameTable gameTable={gameTable} onSquareClick={getDataOnClick} active={activePlayer} player={player[activePlayer] ? player[activePlayer].playerSymbol : null}/>
 
 
         <button className={styles['reset-button']} onClick={clickHandlerReset} >Reset</button>
@@ -163,7 +169,7 @@ function App() {
         <Log data={gameSquareData} />
       </div>
       {/* end main conatiner */}
-      <PopUp winner={winner1} onClosePopUp={closeHandlerPopUp} draw={gameDraw} />
+      <PopUp winner={winner1} onClosePopUp={closeHandlerPopUp} onCancel={clickHandlerReset} draw={gameDraw} />
 
     </main>
   )

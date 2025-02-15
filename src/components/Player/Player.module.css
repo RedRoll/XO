@@ -10,7 +10,7 @@
     border-radius: 3px;
     /* border: 1px solid white; */
     overflow: hidden;
-    border: 1px solid white;
+    border: 1px solid rgb(64, 35, 35);
 }
 
 .active-player {
@@ -19,6 +19,10 @@
     animation-name: borderAnimation;
     animation-duration: .5s;
     animation-iteration-count: infinite;
+}
+
+.animate-label:hover {
+    cursor: pointer;
 }
 
 input {
@@ -40,6 +44,9 @@ input {
 input:focus {
     border: 1px solid white;
 }
+input:hover {
+    border: 1px solid white;
+}
 
 input:focus.animated-input {
     animation-play-state: paused;
@@ -57,6 +64,10 @@ input:focus.animated-input {
     background-color: rgb(255, 255, 255);
     transition: background-color .3s ease;
     cursor: pointer;
+}
+
+.player__button:hover {
+    background-color: rgb(252, 178, 178);
 }
 
 .player__button:disabled {
@@ -145,7 +156,7 @@ input:focus.animated-input {
     }
 
     50% {
-        color: rgb(213, 208, 208);
+        color: rgb(191, 134, 134);
     }
 
     100% {

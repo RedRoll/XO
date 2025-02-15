@@ -1,34 +1,38 @@
 import styles from './GameTable.module.css'
 
 
-const GameBoard = ({ gameTable, onSquareClick, active}) => {
+const GameBoard = ({ gameTable, onSquareClick, active, player }) => {
+
+    console.log(player)
 
     return (
         <ol className={styles.board}>
 
-       
 
-            {gameTable.map((row, rowIndex) => <li className={styles.board__wrapper} key={rowIndex}> {/* 3 rows*/}
 
-                <ol className={styles.board__row}>
+            {gameTable.map((row, rowIndex) =>
 
-                    {row.map((symbol, colIndex) => <li className={styles.row__symbol} key={colIndex}> {/*3 items in row*/}
+                <li className={styles.board__wrapper} key={rowIndex}> {/* 3 rows*/}
 
-                        <button onClick={() => onSquareClick(rowIndex, colIndex)} className={styles.symbol__button} disabled={symbol !== null || !active} > {/*disabled if symbol is on cell or game not started yet*/}
-                            <span className={styles.button__item}>
+                    <ol className={styles.board__row}>
 
-                                {symbol}
+                        {row.map((symbol, colIndex) => <li className={styles.row__symbol} key={colIndex}> {/*3 items in row*/}
 
-                            </span>
-                        </button> {/*cell in item*/}
+                            <button onClick={() => onSquareClick(rowIndex, colIndex)} className={`${styles.symbol__button} ${symbol || active ? styles['enable-symbol__button'] : null} ${player === symbol ? styles['selected-symbol__button'] : null}`} disabled={symbol !== null || !active} > {/*disabled if symbol is on cell or game not started yet*/}
+                                <span className={styles.button__item}>
 
-                    </li>)}
+                                    {symbol}
 
-                </ol>
+                                </span>
+                            </button> {/*cell in item*/}
 
-            </li>)}
+                        </li>)}
 
-           
+                    </ol>
+
+                </li>)}
+
+
 
         </ol>
     )
